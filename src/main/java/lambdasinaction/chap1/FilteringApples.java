@@ -16,15 +16,17 @@ public class FilteringApples {
 
 
         // [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-//        List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple);
-//        System.out.println(greenApples);
+        List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple);
+        System.out.println(greenApples);
 
         // [Apple{color='green', weight=155}]
-        /*List<Apple> heavyApples = filterApples(inventory, FilteringApples::isHeavyApple);
+        List<Apple> heavyApples = filterApples(inventory, FilteringApples::isHeavyApple);
         System.out.println(heavyApples);
 
         // [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-        List<Apple> greenApples2 = filterApples(inventory, apple -> {return  apple.getColor().equals("green");});
+        List<Apple> greenApples2 = filterApples(inventory, apple -> {
+            return apple.getColor().equals("green");
+        });
         System.out.println(greenApples2);
 
         // [Apple{color='green', weight=155}]
@@ -33,7 +35,7 @@ public class FilteringApples {
         // []
         List<Apple> weirdApples = filterApples(inventory, apple -> apple.getWeight() < 80 ||
                 "brown".equals(apple.getColor()));
-        System.out.println(weirdApples);*/
+        System.out.println(weirdApples);
     }
 
     public static boolean isGreenApple(Apple apple) {
@@ -46,7 +48,7 @@ public class FilteringApples {
 
     public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p) {
         List<Apple> result = new ArrayList<>();
-       // Predicate<Apple> predicate = p.negate();
+        // Predicate<Apple> predicate = p.negate();
         for (Apple apple : inventory) {
             if (p.test(apple)) {
                 result.add(apple);
@@ -90,7 +92,6 @@ public class FilteringApples {
                     '}';
         }
     }
-
 
 
 }
