@@ -1,6 +1,8 @@
 package com.springboot.start;
 
 import com.springboot.SpringbootDemoApplication;
+import com.springboot.model.Reservation;
+import com.springboot.util.JacksonUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,7 @@ import java.nio.charset.Charset;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,6 +29,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringbootDemoApplication.class)
 @WebAppConfiguration
+//@ContextConfiguration(classes = WebConfig.class)
+//@WebAppConfiguration("src/test/webapp")
+//@WebAppConfiguration("classpath:test-web-resources")
 public class SpringbootDemoApplicationTests {
     private MediaType contentType = new MediaType("application",
             "json", Charset.forName("UTF-8"));
@@ -37,6 +43,11 @@ public class SpringbootDemoApplicationTests {
     public void setup() {
         System.out.println("-------------------begin------------------------------------------");
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
+    }
+
+    @Test
+    public void testMock() {
+        System.out.println(this.mockMvc);
     }
 
     @Test
@@ -69,25 +80,15 @@ public class SpringbootDemoApplicationTests {
                 .andExpect(jsonPath("$[1].reservationName", is("jlong")));
     }
 
-    /**
-     *  @Test
-    public void createBookmark() throws Exception {
-    String bookmarkJson = json(new Bookmark(
-    this.account, "http://spring.io", "a bookmark to the best resource for Spring news and information"));
-
-    this.mockMvc.perform(post("/" + userName + "/bookmarks")
-    .contentType(contentType)
-    .content(bookmarkJson))
-    .andExpect(status().isCreated());
+    @Test
+    public void testSaveReservation() throws Exception {
+        Reservation reservation = new Reservation(null,"TestSave111");
+        String reservationJson = JacksonUtil.Obj2Json(reservation);
+        this.mockMvc.perform(post("/save/reservation")
+                .contentType(contentType)
+                .content(reservationJson))
+                .andExpect(status().isOk());
     }
-
-    protected String json(Object o) throws IOException {
-    MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
-    this.mappingJackson2HttpMessageConverter.write(
-    o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
-    return mockHttpOutputMessage.getBodyAsString();
-    }
-     */
 
     @After
     public void tearDown() {

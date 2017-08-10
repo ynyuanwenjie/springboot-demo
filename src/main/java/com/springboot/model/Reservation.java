@@ -1,5 +1,7 @@
 package com.springboot.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ public class Reservation implements Serializable{
     @Id
     @GeneratedValue
     private Long id;
+    @NotBlank
     private String reservationName;
 
     public Reservation() {

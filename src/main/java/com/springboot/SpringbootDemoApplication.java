@@ -14,8 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
 import java.util.Arrays;
 
 @SpringBootApplication
-@ComponentScan("com")
-@EntityScan("com")
+@ComponentScan("com.springboot")
+@EntityScan("com.springboot")
 @EnableAutoConfiguration
 public class SpringbootDemoApplication {
 

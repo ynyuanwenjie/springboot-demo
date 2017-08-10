@@ -5,10 +5,9 @@ import com.springboot.service.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 /**
@@ -33,6 +32,12 @@ public class ReservationController {
         return this.reservationRepository.findAll();
     }
 
+    @RequestMapping(value = "/save/reservation" ,method = RequestMethod.POST)
+    Reservation saveReservation(@Valid @RequestBody Reservation reservation) throws Exception {
+        System.out.println(reservation);
+        return this.reservationRepository.save(reservation);
+    }
+
     @RequestMapping("/{name}/reservation")
     Reservation findReservation(@PathVariable String name) {
         return this.reservationRepository.findAll()
@@ -40,6 +45,7 @@ public class ReservationController {
                 .findFirst()
                 .orElse(new Reservation(null,"sorry,there is no reservation name is "+name));
     }
+
 
     @RequestMapping("/{id}/reservation")
     Reservation findReservation(@PathVariable Long id) throws Exception {
