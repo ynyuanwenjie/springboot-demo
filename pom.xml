@@ -32,6 +32,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
@@ -72,6 +76,8 @@
         </dependencies>
     </dependencyManagement>
     <!--copy from config-service end -->
+
+    <!--Spring Boot插件-->
     <build>
         <plugins>
             <plugin>

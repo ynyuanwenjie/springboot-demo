@@ -39,6 +39,13 @@ public class SpringbootDemoApplicationTests {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    /**
+     * 测试加载上下文
+     */
+    @Test
+    public void contextLoads() {
+    }
+
     @Before
     public void setup() {
         System.out.println("-------------------begin------------------------------------------");
@@ -52,7 +59,7 @@ public class SpringbootDemoApplicationTests {
 
     @Test
     public void testReadReservation() throws Exception {
-        String urlTemplate = "/jlong/reservation";
+        String urlTemplate = "reservation/name/jlong";
         mockMvc.perform(get(urlTemplate))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
@@ -61,7 +68,7 @@ public class SpringbootDemoApplicationTests {
 
     @Test
     public void testReadReservationJsonPath() throws Exception {
-        String urlTemplate = "/jlong/reservation";
+        String urlTemplate = "reservation/name/jlong";
         mockMvc.perform(get(urlTemplate))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
@@ -71,7 +78,7 @@ public class SpringbootDemoApplicationTests {
 
     @Test
     public void testReadReservationJsonPathSize() throws Exception {
-        String urlTemplate = "/jlong/reservation";
+        String urlTemplate = "reservation/name/jlong";
         mockMvc.perform(get(urlTemplate))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
@@ -84,7 +91,7 @@ public class SpringbootDemoApplicationTests {
     public void testSaveReservation() throws Exception {
         Reservation reservation = new Reservation(null,"TestSave111");
         String reservationJson = JacksonUtil.Obj2Json(reservation);
-        this.mockMvc.perform(post("/save/reservation")
+        this.mockMvc.perform(post("reservation/save")
                 .contentType(contentType)
                 .content(reservationJson))
                 .andExpect(status().isOk());

@@ -15,6 +15,7 @@ import java.util.Collection;
  */
 @RefreshScope
 @RestController
+@RequestMapping("/reservation")
 public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
@@ -27,31 +28,31 @@ public class ReservationController {
         return "successful";
     }
 
-    @RequestMapping("/reservations")
+    @RequestMapping("/list")
     Collection<Reservation> reservations() {
         return this.reservationRepository.findAll();
     }
 
-    @RequestMapping(value = "/save/reservation" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/save" ,method = RequestMethod.POST)
     Reservation saveReservation(@Valid @RequestBody Reservation reservation) throws Exception {
         System.out.println(reservation);
         return this.reservationRepository.save(reservation);
     }
 
-    @RequestMapping("/{name}/reservation")
+    @RequestMapping("/name/{name}")
     Reservation findReservation(@PathVariable String name) {
         return this.reservationRepository.findAll()
                 .stream().filter(s -> s.getReservationName().equals(name))
                 .findFirst()
-                .orElse(new Reservation(null,"sorry,there is no reservation name is "+name));
+                .orElse(null);
     }
 
 
-    @RequestMapping("/{id}/reservation")
+    @RequestMapping("/id/{id}")
     Reservation findReservation(@PathVariable Long id) throws Exception {
         return this.reservationRepository.findAll()
                 .stream().filter(s -> s.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("sorry,there is no reservation id is "+id));
+                .orElseThrow(() -> new Exception("sorry,there is no reservation id is  "+id));
     }
 }

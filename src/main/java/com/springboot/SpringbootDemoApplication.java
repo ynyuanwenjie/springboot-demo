@@ -16,7 +16,6 @@ import java.util.Arrays;
 @SpringBootApplication
 @ComponentScan("com.springboot")
 @EntityScan("com.springboot")
-@EnableAutoConfiguration
 public class SpringbootDemoApplication {
 
 	/*@Bean
