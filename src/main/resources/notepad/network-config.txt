@@ -1,0 +1,40 @@
+#配置centos和主机ip访问规则
+关闭虚拟机，进入 Windows 平台的命令提示符模式vbox的安装目录
+C:\document\install\vbox\
+VBoxManage modifyvm "centos" --natpf1 "guestssh,tcp,,5555,,22"
+VBoxManage modifyvm "centos" --natpf1 "guestoracle,tcp,,6666,,1521"
+VBoxManage modifyvm "centos" --natpf1 "hbaseport,tcp,,60010,,60010"
+VBoxManage modifyvm "centos" --natpf1 "hbaseport1,tcp,,60000,,60000"
+VBoxManage modifyvm "centos" --natpf1 "zookeeper,tcp,,8888,,2181"
+VBoxManage modifyvm "centos" --natpf1 "gitlab,tcp,,800,,80"
++++++++++++++++++++hbase+++++++++++++++++++++++++++
+VBoxManage modifyvm "centos" --natpf1 "hbase_quorum,tcp,,52181,,2181"
+VBoxManage modifyvm "centos" --natpf1 "hbase_master,tcp,,516010,,16010"
+
+#配置网络（home）
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+HWADDR=08:00:27:4B:03:87
+TYPE=Ethernet
+UUID=9511790a-c270-48b7-8995-3b751dca9c0b
+ONBOOT=yes
+BOOTPROTO=static
+BROADCAST=192.168.2.255
+IPADDR=192.168.2.199
+NETMASK=255.255.255.0
+GATEWAY=192.168.2.1
+DNS1=192.168.2.1
+DNS2=8.8.8.8
+#NM_CONTROLLED=no
+
+vi /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=localhost.localdomain
+GATEWAY=192.168.2.1
+
+vi /etc/resolv.conf
+nameserver 192.168.2.1
+
+
+
+scp local_file root@10.10.11.130:/usr/local/hadoop/hbase

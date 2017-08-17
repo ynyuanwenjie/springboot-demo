@@ -1,0 +1,25 @@
+--指定main方法
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<version>2.4</version>
+			<configuration>
+				<archive>
+					<manifest>
+						<addClasspath>true</addClasspath>
+						<classpathPrefix>lib/</classpathPrefix>
+						<mainClass>com.trs.hbase.Example</mainClass>
+					</manifest>
+				</archive>
+			</configuration>
+		</plugin>
+	</plugins>
+	<finalName>com.trs.hive</finalName>
+</build>
+
+--生成项目依赖jar包树
+dependency:tree
+
+mvn clean package  -Dmaven.test.skip=true
