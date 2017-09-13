@@ -8,4 +8,5 @@ RUN ["mvn", "verify"]
 RUN ["mvn", "clean package"]
 EXPOSE 8116
 EXPOSE 8080
+
 CMD ["java", "-jar", "target/springbootdemo-0.0.1-SNAPSHOT.jar.jar"]
