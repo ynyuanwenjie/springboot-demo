@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -16,7 +17,7 @@ import java.util.Arrays;
 @SpringBootApplication
 @ComponentScan("com.springboot")
 @EntityScan("com.springboot")
-public class SpringbootDemoApplication {
+public class SpringbootDemoApplication extends SpringBootServletInitializer {
 
 	/*@Bean
     CommandLineRunner runner (ReservationRepository rr) {
@@ -31,6 +32,7 @@ public class SpringbootDemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootDemoApplication.class, args);
+
     }
 }
 
