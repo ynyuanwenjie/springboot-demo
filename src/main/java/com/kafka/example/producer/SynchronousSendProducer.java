@@ -24,10 +24,9 @@ public class SynchronousSendProducer {
         kafkaProps.put("acks","-1");
         kafkaProps.put("retries","3");
         KafkaProducer producer = new KafkaProducer(kafkaProps);
-        ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic,key, value);
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic,key, value);
             producer.send(record);
-        ProducerRecord<String, String> msg = new ProducerRecord<>("CustomerCountry", "Precision Products",
-                        "France");
+        ProducerRecord<String, String> msg = new ProducerRecord<>("CustomerCountry", "Precision Products", "France");
         try {
             producer.send(msg);
         } catch (Exception e) {
