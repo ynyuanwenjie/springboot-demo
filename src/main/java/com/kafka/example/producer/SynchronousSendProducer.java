@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
  * Created by yuanwenjie on 2017/11/11.
  */
 public class SynchronousSendProducer {
-    private static final String topic = "topic_fireAndForget";
+    private static final String topic = "fireAndForget";
     private static final Integer partition = 0;
     private static final Long timestamp = null;
     private static final String key = "key";
@@ -25,10 +25,8 @@ public class SynchronousSendProducer {
         kafkaProps.put("retries","3");
         KafkaProducer producer = new KafkaProducer(kafkaProps);
         ProducerRecord<String, String> record = new ProducerRecord<>(topic,key, value);
-            producer.send(record);
-        ProducerRecord<String, String> msg = new ProducerRecord<>("CustomerCountry", "Precision Products", "France");
         try {
-            producer.send(msg);
+            producer.send(record).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
