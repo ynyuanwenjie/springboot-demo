@@ -14,7 +14,7 @@ public class SynchronousSendProducer {
     private static final Integer partition = 0;
     private static final Long timestamp = null;
     private static final String key = "key";
-    private static final String value = "--value--";
+    private static final String value = "--value--syn-from-partition 1";
 
     public static void main(String[] args) {
         Properties kafkaProps = new Properties();
@@ -24,7 +24,7 @@ public class SynchronousSendProducer {
         kafkaProps.put("acks","-1");
         kafkaProps.put("retries","3");
         KafkaProducer producer = new KafkaProducer(kafkaProps);
-        ProducerRecord<String, String> record = new ProducerRecord<>(topic,key, value);
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic,partition,key, value);
         try {
             producer.send(record).get();
         } catch (Exception e) {
