@@ -13,7 +13,7 @@ public class SynchronousSendProducer {
     private static final String topic = "fireAndForget";
     private static final Integer partition = 0;
     private static final Long timestamp = null;
-    private static final String key = "key";
+    private static final String key = "key0";
     private static final String value = "--value--syn-from-partition 1";
 
     public static void main(String[] args) {

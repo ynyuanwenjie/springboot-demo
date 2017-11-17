@@ -13,7 +13,7 @@ public class AsynchronousSendProducer implements Callback  {
     private static final String topic = "fireAndForget";
     private static final Integer partition = 0;
     private static final Long timestamp = null;
-    private static final String key = "key";
+    private static final String key = "key1";
     private static final String value = "--value--as----";
 
     public static void main(String[] args) {
@@ -24,11 +24,15 @@ public class AsynchronousSendProducer implements Callback  {
         kafkaProps.put("acks","1");
         kafkaProps.put("retries","3");
         KafkaProducer producer = new KafkaProducer(kafkaProps);
-        ProducerRecord<String, String> record = new ProducerRecord<>(topic,key, value);
-        try {
-            producer.send(record);
-        } catch (Exception e) {
-            e.printStackTrace();
+        int i = 0;
+        while (true) {
+            ProducerRecord<String, String> record = new ProducerRecord<>(topic,key, value+","+i);
+            try {
+                producer.send(record);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            i++;
         }
     }
 
