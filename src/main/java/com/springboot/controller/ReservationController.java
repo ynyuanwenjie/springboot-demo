@@ -1,5 +1,6 @@
 package com.springboot.controller;
 
+import com.springboot.annotation.Log;
 import com.springboot.model.Reservation;
 import com.springboot.service.ReservationRepository;
 import org.aspectj.lang.annotation.Around;
@@ -14,7 +15,6 @@ import java.util.Collection;
 /**
  * Created by yuanwenjie on 2017/8/9.
  */
-@Aspect
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
@@ -24,6 +24,7 @@ public class ReservationController {
     /*@Value("${message}")
     String message;
 */
+    @Log
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     String message() {
         return "successful";

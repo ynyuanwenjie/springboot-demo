@@ -1,6 +1,7 @@
 package com.springboot.start;
 
 import com.springboot.SpringbootDemoApplication;
+import com.springboot.annotation.Log;
 import com.springboot.service.AopService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,12 @@ public class TestAopService {
 
     @Test
     public void test01() {
-        System.out.println(aopService);
+        //aopService.findByCustName("baoliping");
+        testAop();
+    }
+
+    @Log
+    public void testAop() {
+        System.out.println("test aop");
     }
 }
