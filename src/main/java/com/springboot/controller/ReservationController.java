@@ -2,10 +2,8 @@ package com.springboot.controller;
 
 import com.springboot.annotation.Log;
 import com.springboot.model.Reservation;
+import com.springboot.service.MessageCommunicator;
 import com.springboot.service.ReservationRepository;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +25,12 @@ public class ReservationController {
     @Log
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     String message() {
+        MessageCommunicator messageCommunicator
+                = new MessageCommunicator();
+        messageCommunicator.deliver("Wanna learn AspectJ?");
+        messageCommunicator.deliver("Harry", "having fun?");
+
+
         return "successful";
     }
 

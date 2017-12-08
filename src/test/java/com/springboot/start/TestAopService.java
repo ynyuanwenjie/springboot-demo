@@ -1,8 +1,8 @@
 package com.springboot.start;
 
 import com.springboot.SpringbootDemoApplication;
-import com.springboot.annotation.Log;
-import com.springboot.service.AopService;
+import com.springboot.service.MessageCommunicator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +14,16 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @SpringBootTest(classes = SpringbootDemoApplication.class)
 @WebAppConfiguration
 public class TestAopService {
-
     @Autowired
-    private AopService aopService;
+    private MessageCommunicator messageCommunicator;
 
+
+    @Before
+    public void setup(){
+    }
     @Test
     public void test01() {
-        //aopService.findByCustName("baoliping");
-        testAop();
+        messageCommunicator.deliver("Wanna learn AspectJ?");
     }
 
-    @Log
-    public void testAop() {
-        System.out.println("test aop");
-    }
 }
