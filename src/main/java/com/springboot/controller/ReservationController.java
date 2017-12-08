@@ -19,18 +19,14 @@ public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private MessageCommunicator messageCommunicator;
+
     /*@Value("${message}")
     String message;
 */
-    @Log
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    String message() {
-        MessageCommunicator messageCommunicator
-                = new MessageCommunicator();
-        messageCommunicator.deliver("Wanna learn AspectJ?");
-        messageCommunicator.deliver("Harry", "having fun?");
-
-
+    Object message() {
         return "successful";
     }
 
