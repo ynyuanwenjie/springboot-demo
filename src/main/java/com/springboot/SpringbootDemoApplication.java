@@ -1,23 +1,17 @@
 package com.springboot;
-
-import com.springboot.model.Reservation;
-import com.springboot.service.ReservationRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-
-import java.util.Arrays;
 
 @SpringBootApplication
 @ComponentScan("com.springboot")
 @EntityScan("com.springboot")
-public class SpringbootDemoApplication extends SpringBootServletInitializer {
+@EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
+public class SpringbootDemoApplication {
 
 	/*@Bean
     CommandLineRunner runner (ReservationRepository rr) {
@@ -35,4 +29,6 @@ public class SpringbootDemoApplication extends SpringBootServletInitializer {
 
     }
 }
+
+
 
